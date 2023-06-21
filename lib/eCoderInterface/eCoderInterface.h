@@ -9,6 +9,8 @@ class eCoderInterface
 {
     uint8_t CM = 0b00000010;
     uint8_t bytesIn[6];
+    uint8_t CRC_8X1[9];
+    void CRC_8X1_TAB_Creat(void);
     public:
         struct StatusField {
             uint8_t info;
@@ -24,10 +26,12 @@ class eCoderInterface
         } data;
 
         void setPins();
-        void update();
-        EncoderData raw();
+        uint8_t update();
+        EncoderData dataStruct();
+        uint8_t* raw();
         uint32_t position();
         StatusField status();
+        uint8_t CRC_C(uint8_t* CRCbuf, uint8_t Length);
 
 };
 

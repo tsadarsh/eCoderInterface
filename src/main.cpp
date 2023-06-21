@@ -9,7 +9,13 @@ void setup() {
 }
 
 void loop() {
-  encoder.update();
-  Serial.println(encoder.position());
+  if(encoder.update()) 
+  {
+    Serial.println(encoder.position());
+  }
+  else 
+  {
+    Serial.println("CRC Error!");
+  }
   delay(100);
 }
