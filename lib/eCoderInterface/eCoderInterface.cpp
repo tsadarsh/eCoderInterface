@@ -38,8 +38,12 @@ eCoderInterface::EncoderData eCoderInterface::dataStruct() {
 }
 
 uint32_t eCoderInterface::position() {
-  //to do
-    return this->data.pos >> (21 - this->setResolution);
+  //testing needed
+  return this->data.pos >> (21 - this->setResolution);
+}
+
+double eCoderInterface::normalize(uint32_t data) {
+  return (data/4194303);
 }
 
 eCoderInterface::StatusField eCoderInterface::status() {

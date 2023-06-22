@@ -12,7 +12,7 @@ void setup() {
 void loop() {
   if(encoder.update()) 
   {
-    Serial.println(encoder.position());
+    Serial.println(encoder.normalize(encoder.position()));
   }
   else 
   {
