@@ -20,16 +20,17 @@ uint8_t eCoderInterface::update() {
   delayMicroseconds(1);
   digitalWrite(DE, LOW);
   Serial2.readBytes(this->bytesIn, sizeof(this->bytesIn));
-  uint8_t CRC_error = this->CRC_C(this->bytesIn, sizeof(this->bytesIn)-1);
-  if (CRC_error) {
-    return 0;
-  }
   data.cm = this->bytesIn[0];
   data.sa.info = (this->bytesIn[1] >> 4) & 0x0F;
   data.sa.error = (this->bytesIn[1] >> 2) & 0x03;
   data.sa.alarm = this->bytesIn[1] & 0x03;
-  data.pos = (uint32_t) this->bytesIn[2] | ((uint32_t) this->bytesIn[3] << 8) | ((uint32_t) this->bytesIn[4] << 16);
+  data.pos = ((uint32_t) this->bytesIn[2]) | ((uint32_t) this->bytesIn[3] << 8) | ((uint32_t) this->bytesIn[4] << 16);
   data.crc = this->bytesIn[5];
+  
+  uint8_t CRC_error = this->CRC_C(this->bytesIn, sizeof(this->bytesIn)-1);
+  if (CRC_error) {
+    return 0;
+  }
   return 1;
 }
 
@@ -43,7 +44,7 @@ uint32_t eCoderInterface::position() {
 }
 
 double eCoderInterface::normalize(uint32_t data) {
-  return (data/4194303);
+  return (data/(double)1048575);
 }
 
 eCoderInterface::StatusField eCoderInterface::status() {
