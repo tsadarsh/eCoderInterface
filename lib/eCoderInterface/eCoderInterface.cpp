@@ -39,12 +39,17 @@ eCoderInterface::EncoderData eCoderInterface::dataStruct() {
 }
 
 uint32_t eCoderInterface::position() {
-  //testing needed
-  return this->data.pos >> (21 - this->setResolution);
+  if (this->setResolution >= this->MAX_Resolution)
+    return this->data.pos;
+  else
+    return this->data.pos >> (this->MAX_Resolution - this->setResolution);
 }
 
 double eCoderInterface::normalize(uint32_t data) {
-  return (data/(double)1048575);
+  if (this->setResolution >= this->MAX_Resolution)
+    return (data/(double)(1<<this->MAX_Resolution));
+  else
+    return (data/(double)(1<<this->setResolution));
 }
 
 eCoderInterface::StatusField eCoderInterface::status() {

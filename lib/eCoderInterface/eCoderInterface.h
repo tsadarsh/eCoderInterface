@@ -7,6 +7,7 @@
 
 class eCoderInterface
 {
+    uint8_t MAX_Resolution = 20;
     uint8_t CM = 0b00000010;
     uint8_t bytesIn[6];
     uint8_t CRC_8X1[9];
