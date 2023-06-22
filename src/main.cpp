@@ -5,18 +5,12 @@ eCoderInterface encoder;
 
 void setup() {
   encoder.setPins();
-  encoder.setResolution = 21; //todo
-  Serial.begin(9600);
+  Serial.begin(2000000);
+  encoder.setResolution = 20;
 }
 
 void loop() {
-  if(encoder.update()) 
-  {
-    Serial.println(encoder.normalize(encoder.position()));
-  }
-  else 
-  {
-    Serial.println("CRC Error!");
-  }
-  delay(100);
+  encoder.update();
+  Serial.println(encoder.normalize(encoder.position()), 15);
+  delay(1);
 }
