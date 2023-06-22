@@ -5,6 +5,7 @@ eCoderInterface encoder;
 
 void setup() {
   encoder.setPins();
+  encoder.setResolution = 21; //todo
   Serial.begin(9600);
 }
 

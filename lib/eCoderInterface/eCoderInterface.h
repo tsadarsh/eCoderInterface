@@ -32,7 +32,7 @@ class eCoderInterface
         uint32_t position();
         StatusField status();
         uint8_t CRC_C(uint8_t* CRCbuf, uint8_t Length);
-
+        uint8_t setResolution = 21;
 };
 
 #endif

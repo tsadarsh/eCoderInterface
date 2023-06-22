@@ -38,7 +38,8 @@ eCoderInterface::EncoderData eCoderInterface::dataStruct() {
 }
 
 uint32_t eCoderInterface::position() {
-    return this->data.pos;
+  //to do
+    return this->data.pos >> (21 - this->setResolution);
 }
 
 eCoderInterface::StatusField eCoderInterface::status() {
@@ -78,3 +79,4 @@ uint8_t eCoderInterface::CRC_C(uint8_t *CRCbuf, uint8_t Length) {
   }
   return CRCResult;
 }
+
