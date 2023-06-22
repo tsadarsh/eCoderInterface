@@ -13,7 +13,7 @@ void eCoderInterface::setPins() {
   Serial2.begin(2500000);
 }
 
-// Returns 0 if there is a CRC error. Else returns 1
+// Returns 0 if there is a CRC error. Else returns 1. Or check `CRC_C_CHECK` flag.
 uint8_t eCoderInterface::update() {
   digitalWrite(DE, HIGH);
   Serial2.write(this->CM);
@@ -29,9 +29,14 @@ uint8_t eCoderInterface::update() {
   
   uint8_t CRC_error = this->CRC_C(this->bytesIn, sizeof(this->bytesIn)-1);
   if (CRC_error) {
+    this->CRC_C_ERROR = true;
     return 0;
   }
-  return 1;
+  else {
+    this->CRC_C_ERROR = false;
+    return 1;
+
+  }
 }
 
 eCoderInterface::EncoderData eCoderInterface::dataStruct() {

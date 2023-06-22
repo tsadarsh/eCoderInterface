@@ -35,6 +35,7 @@ class eCoderInterface
         uint8_t CRC_C(uint8_t* CRCbuf, uint8_t Length);
         uint8_t setResolution = 21;
         double normalize(uint32_t data);
+        bool CRC_C_ERROR = true;
 };
 
 #endif
